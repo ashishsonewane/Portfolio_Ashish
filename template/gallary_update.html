@@ -1,0 +1,87 @@
+{% extends "base.html" %}{% load static %}{% block content %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Form Edit</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'gallary_table' %}">Back to Table</a></li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Gallary Form </h5>
+
+            <form action="{% url 'gallary_update' gallaryobj.id  %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">Name</label>
+                <input type="text" name="name_complete" value="{{gallaryobj.name_complete}}" class="form-control" id="inputNanme4">
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">Avtar</label>
+                <input type="file" name="avatar" value="{{gallaryobj.avatar}}" class="form-control" id="inputEmail4" >
+                {% if gallaryobj.avatar %}
+                  <a href="{{i.avatar.url}}" target ="_blank"><img src="{{gallaryobj.avatar.url}}" height="70px" width="70px"></a>
+                  {% endif %}
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">Mini About</label>
+                <input type="text" name="mini_about" value="{{gallaryobj.mini_about}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">phone</label>
+                <input type="number" name="phone" value="{{gallaryobj.phone}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">email</label>
+                <input type="email" name="email" value="{{gallaryobj.email}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">address</label>
+                <input type="text" name="address" value="{{gallaryobj.address}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">cv</label>
+                <input type="file" name="cv"  value="{{gallaryobj.cv}}"  class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">github</label>
+                <input type="text" name="github" value="{{gallaryobj.github}}"  class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">linkedin</label>
+                <input type="text" name="linkedin" value="{{gallaryobj.linkedin}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">facebook</label>
+                <input type="text" name="facebook" value="{{gallaryobj.facebook}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">twitter</label>
+                <input type="text" name="twitter" value="{{gallaryobj.twitter}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">instagram</label>
+                <input type="text" name="instagram" value="{{gallaryobj.instagram}}" class="form-control" id="inputEmail4" >
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">mycv</label>
+                <input type="file" name="mycv" value="{{gallaryobj.mycv}}" class="form-control" id="inputEmail4" >
+              </div>
+              <br>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Submit Button</label>
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Submit Form</button>
+                </div>
+              </div>
+            </form>
+
+      {% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% load static %}{% block content %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Form Edit</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'projects_table' %}">Back to Table</a></li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Project Form </h5>
+
+            <form action="{% url 'project_edit' projectobj.id  %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="modal-body">
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">title</label>
+                  <input type="text" name="title"  value="{{projectobj.title}}" class="form-control" id="inputNanme4">
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">skill</label>
+                  <input type="text" name="skill" value="{{projectobj.skill}}" class="form-control" id="inputEmail4" >
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">link</label>
+                  <input type="text" name="link" value="{{projectobj.link}}" class="form-control" id="inputEmail4" >
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">image</label>
+                  <input type="file" name="image"  value="{{projectobj.image}}" class="form-control" id="inputEmail4" >
+                </div>
+              </div>
+              <br>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Submit Button</label>
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Submit Form</button>
+                </div>
+              </div>
+            </form>
+
+  
+
+
+      {% endblock %}

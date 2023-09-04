@@ -1,0 +1,136 @@
+{% extends "base.html" %}{% load static %}{% block content %}
+
+<main id="main" class="main">
+  <div class="d-flex" style="justify-content: space-between;">
+    <div class="pagetitle">
+      <h1>Personal Information</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'settings' %}">Homepage</a></li>
+          <li class="breadcrumb-item active">Data</li>
+        </ol>
+      </nav>
+    </div>
+    <!--  -->
+    <div class="add_btn" style="justify-content:end;">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+        Add Data
+      </button>
+    </div>
+  </div>
+  <!--  -->
+    <div class="modal fade" id="basicModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Add  Data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="{% url 'add_skill' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body"> 
+              <div class="col-12">
+                <label class="col-sm-2 col-form-label">USER</label>
+                      <div class="form-group">
+                        <select class="form-select" aria-label="Default select example" name="username" id="username">
+                          <!-- {{user}} -->
+                          {% for i in user %}
+                          <option value="{{i.id}}">{{i.username}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+              </div>
+              
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">skill</label>
+                <input type="text" name="skill" class="form-control" id="inputNanme4">
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">number</label>
+                <input type="number" name="num" class="form-control" id="inputEmail4" >
+              </div>
+              <!-- <div class="col-12">
+                <label for="inputEmail4" class="form-label">number</label>
+                <input type="color" name="color" class="form-control" id="inputEmail4" >
+              </div> -->
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary btn-pill">Save </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div><!-- End Basic Modal--><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+               <!-- Table with stripped rows -->
+              <table class="table" style="margin: 0 auto; text-align: center;">
+
+                <thead>
+                  <tr>
+                    <th scope="col">SR no</th>
+                    <th scope="col">skill</th>
+                    <th scope="col">num</th>
+                    
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.skill}}</td>
+                    <td>{{i.num}}</td>
+              
+                    <td>
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                     
+                        <a class="dropdown-item" href="{% url 'skill_update' i.id %}"><i class="bi bi-pencil-square"></i></a>  
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="dropdown-item" href="" onclick="skill_delete('{{i.id}}')" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bi bi-trash3-fill"></i></a>
+                        
+                        <div class="modal fade" id="verticalycentered" tabindex="-1">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Data Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <form action="" id="deletegarllyid">
+                                <div class="modal-body">
+                                  <b>Are you sure to delete the data ?</b>
+                                 </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Delete</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <script>
+    function skill_delete(id){
+      document.getElementById("deletegarllyid").action = "skill_delete/"+id;
+    }
+  </script>
+  {% endblock %}

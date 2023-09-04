@@ -1,0 +1,393 @@
+{% extends "base.html" %}{% load static %}{% block content %}
+
+
+
+
+<main id="main" class="main">
+
+  <div class="d-flex" style="justify-content: space-between;">
+
+    <div class="pagetitle">
+
+      <h1>Personal Information</h1>
+
+      <nav>
+
+        <ol class="breadcrumb">
+
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+
+          <li class="breadcrumb-item"><a href="{% url 'settings' %}">Homepage</a></li>
+
+          <li class="breadcrumb-item active">Data</li>
+
+        </ol>
+
+      </nav>
+
+    </div>
+
+    <!--  -->
+
+    <div class="add_btn" style="justify-content:end;">
+
+      {% if data %}
+
+      {% else %}
+
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+
+        Add Data
+
+      </button>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  <!--  -->
+
+    <div class="modal fade" id="basicModal" tabindex="-1">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <h5 class="modal-title" >Add  Data</h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+          </div>
+
+          <form action="{% url 'add_gallary' %}" method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="modal-body">
+
+              <div class="col-12">
+
+                <label for="inputNanme4" class="form-label">Name</label>
+
+                <input type="text" name="name_complete" class="form-control" id="inputNanme4">
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">Avtar</label>
+
+                <input type="file" name="avatar" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">Mini About</label>
+
+                <input type="text" name="mini_about" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">phone</label>
+
+                <input type="number" name="phone" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">email</label>
+
+                <input type="email" name="email" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">address</label>
+
+                <input type="text" name="address" class="form-control" id="inputEmail4" >
+
+              </div>
+
+
+
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">cv</label>
+
+                <input type="file" name="cv" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">github</label>
+
+                <input type="text" name="github" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">linkedin</label>
+
+                <input type="text" name="linkedin" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">facebook</label>
+
+                <input type="text" name="facebook" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">twitter</label>
+
+                <input type="text" name="twitter" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">instagram</label>
+
+                <input type="text" name="instagram" class="form-control" id="inputEmail4" >
+
+              </div>
+
+              <div class="col-12">
+
+                <label for="inputEmail4" class="form-label">mycv</label>
+
+                <input type="file" name="mycv" class="form-control" id="inputEmail4" >
+
+              </div>
+
+         
+
+             
+
+            </div>
+
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary btn-pill">Save </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div><!-- End Basic Modal--><!-- End Page Title -->
+
+
+
+
+    <section class="section">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <div class="card">
+
+            <div class="card-body">
+
+               <!-- Table with stripped rows -->
+
+              <table class="table" style="margin: 0 auto; text-align: center;">
+
+
+
+
+                <thead>
+
+                  <tr>
+
+                    <th scope="col">SR no</th>
+
+                    <th scope="col">name_complete</th>
+
+                    <th scope="col">avatar</th>
+
+                    <th scope="col">mini_about</th>
+
+                    <th scope="col">address</th>
+
+                    <th scope="col">phone</th>
+
+                    <th scope="col">email</th>
+
+                    <th scope="col">cv</th>
+
+                    <th scope="col">github</th>
+
+                    <th scope="col">linkedin</th>
+
+                    <th scope="col">facebook</th>
+
+                    <th scope="col">twitter</th>
+
+                    <th scope="col">instagram</th>
+
+                    <th scope="col">mycv</th>
+
+                    <th scope="col">Action</th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {% for i in data %}
+
+                  <tr>
+
+                    <td>{{forloop.counter}}</td>
+
+                    <td>{{i.name_complete}}</td>
+
+                    <td>
+
+                    {% if i.avatar %}
+
+                    <img src="{{i.avatar.url}}" height="50px" width="100px">
+
+                    {% endif %}
+
+                    </td>
+
+                    <td>{{i.mini_about}}</td>
+
+                    <td>{{i.address}}</td>
+
+                    <td>{{i.phone}}</td>
+
+                    <td>{{i.email}}</td>
+
+                    <td>{{i.cv}}</td>
+
+                    <td>{{i.github}}</td>
+
+                    <td>{{i.linkedin}}</td>
+
+                    <td>{{i.facebook}}</td>
+
+                    <td>{{i.twitter}}</td>
+
+                    <td>{{i.instagram}}</td>
+
+                    <td>{{i.mycv}}</td>
+
+                   
+
+   
+
+                    <td>
+
+                      <div class="btn-group" role="group" aria-label="Basic example">
+
+                     
+
+                        <a class="dropdown-item" href="{% url 'gallary_update' i.id %}"><i class="bi bi-pencil-square"></i></a>  
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <a class="dropdown-item" href="" onclick="delete_gallary('{{i.id}}')" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bi bi-trash3-fill"></i></a>
+
+                       
+
+                        <div class="modal fade" id="verticalycentered" tabindex="-1">
+
+                          <div class="modal-dialog modal-dialog-centered">
+
+                            <div class="modal-content">
+
+                              <div class="modal-header">
+
+                                <h5 class="modal-title">Data Delete</h5>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                              </div>
+
+                              <form action="" id="deletegarllyid">
+
+                                <div class="modal-body">
+
+                                  <b>Are you sure to delete the data ?</b>
+
+                                 </div>
+
+                                <div class="modal-footer">
+
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                  <button type="submit" class="btn btn-primary">Delete</button>
+
+                                </div>
+
+                              </form>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </td>
+
+                  </tr>
+
+                  {% endfor %}
+
+                </tbody>
+
+              </table>
+
+              <!-- End Table with stripped rows -->
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+  <script>
+
+    function delete_gallary(id){
+
+      document.getElementById("deletegarllyid").action = "delete_gallary/"+id;
+
+    }
+
+  </script>
+
+  {% endblock %}
